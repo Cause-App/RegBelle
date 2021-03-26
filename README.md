@@ -30,4 +30,4 @@ ffmpeg -i silent.mp4 -i audio.wav -c:v copy -map 0:v:0 -map 1:a:0 -c:a aac -b:a 
 
 ## JSONS
 
-Dummy space character is `~`
+Dummy "pose change" character is `~`

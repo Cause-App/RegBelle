@@ -47,10 +47,15 @@ class Actor:
 
         self.speaking = speaking
         self.pos = pos
+        self.index = -1
         self.update_index()
     
     def update_index(self):
-        self.index = random.randint(0, len(self.body_graphics)-1)
+        choices = list(range(len(self.body_graphics)))
+        choices = choices[:self.index] + choices[self.index+1:]
+        if len(choices) == 0:
+            return
+        self.index = random.choice(choices)
 
     def get_graphic(self, phone, last_phone):
 
