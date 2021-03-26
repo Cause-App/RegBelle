@@ -1,0 +1,76 @@
+{
+    "audio": "audio.wav",
+    "width": 640,
+    "height": 360,
+    "scenes": [
+        {
+            "background": {
+                "color": [255, 255, 255],
+                "image": "images/birds.jpeg",
+                "x": 0,
+                "y": 0,
+                "width": 640,
+                "height": null
+            },
+            "paragraphs": [
+                {
+                    "actors": [
+                        {
+                            "name": "morgan",
+                            "speaking": true,
+                            "mood": "happy",
+                            "mouthStyle": "smile",
+                            "x": 0,
+                            "y": 0,
+                            "width": 50,
+                            "height": null
+                        }
+                    ],
+                    "text": "All the birds died in nineteen-eighty-six"
+                },
+                {
+                    "actors": [
+                        {
+                            "name": "morgan",
+                            "speaking": true,
+                            "mood": "explainy",
+                            "mouthStyle": "smile",
+                            "x": 100,
+                            "y": 100,
+                            "width": 100,
+                            "height": null
+                        }
+                    ],
+                    "text": "due to Reagan killing them and replacing them with spies that are now watching us."
+                }
+            ]
+        },
+        {
+            "background": {
+                "color": [255, 0, 0],
+                "image": "images/communism.svg",
+                "x": 100,
+                "y": 0,
+                "width": 540,
+                "height": null
+            },
+            "paragraphs": [
+                {
+                    "actors": [
+                        {
+                            "name": "morgan",
+                            "speaking": true,
+                            "mood": "explainy",
+                            "mouthStyle": "smile",
+                            "x": 100,
+                            "y": 100,
+                            "width": 300,
+                            "height": null
+                        }
+                    ],
+                    "text": "The birds work for the bourgeoisie."
+                }
+            ]
+        }
+    ]
+}
