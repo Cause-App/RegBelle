@@ -47,7 +47,10 @@ class Actor:
 
         self.speaking = speaking
         self.pos = pos
-        self.index = random.randint(0, len(graphics["body"][mood])-1)
+        self.update_index()
+    
+    def update_index(self):
+        self.index = random.randint(0, len(self.body_graphics)-1)
 
     def get_graphic(self, phone, last_phone):
 

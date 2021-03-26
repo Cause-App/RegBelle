@@ -8,6 +8,8 @@ class Paragraph:
         self.actors = actors
         self.text = text
         self.words_data = None
+        self.update_times = [0]
+        self.last_time = -1
     
     def which_phone(self, time):
         for word in self.words_data:
@@ -23,14 +25,16 @@ class Paragraph:
     
     def render_frame(self, image, time):
 
-        # TODO
-        # Handle updating the actor's index
+        for i in self.update_times:
+            if time > i and self.last_time <= i:
+                for actor in self.actors:
+                    if actor.speaking:
+                        actor.update_index()
+        
+        self.last_time = time
 
         last_phone = self.which_phone(time-MOUTH_TWEEN_TIME)
         phone = self.which_phone(time)
-
-        if last_phone is None:
-            last_phone = phone
 
         for actor in self.actors:
             body_img, mouth_img, body_pos, mouth_pos = actor.get_graphic(phone if actor.speaking else None, last_phone if actor.speaking else None)

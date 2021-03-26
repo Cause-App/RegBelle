@@ -48,7 +48,7 @@ class BelleRoom:
     def stitch(self, output_dir, force_stitch=False):
         directory = os.path.join(output_dir, self.movie.name, "frames")
         output_file = os.path.join(output_dir, self.movie.name, "render.mp4")
-        if (os.path.exists(output_file) and (tools.confirm("Would you like to overwrite the stitched output video?") != "y")):
+        if (os.path.exists(output_file) and not force_stitch and (tools.confirm("Would you like to overwrite the stitched output video?") != "y")):
             return
         process = subprocess.Popen(
             [
@@ -70,7 +70,7 @@ class BelleRoom:
     def add_audio(self, output_dir, force_add_audio=False):
         input_file = os.path.join(output_dir, self.movie.name, "render.mp4")
         output_file = os.path.join(output_dir, self.movie.name, "render-with-audio.mp4")
-        if (os.path.exists(output_file) and (tools.confirm("Would you like to overwrite the output video with audio overlay?") != "y")):
+        if (os.path.exists(output_file) and not force_add_audio and (tools.confirm("Would you like to overwrite the output video with audio overlay?") != "y")):
             return
         process = subprocess.Popen(
             [

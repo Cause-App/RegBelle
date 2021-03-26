@@ -89,6 +89,8 @@ class Movie:
             for h in self.phoneme_hacks:
                 all_text = all_text.replace(h, self.phoneme_hacks[h])
 
+        all_text = all_text.replace("~", "")
+
         with open(filename, "w") as file:
             file.write(all_text)
 
@@ -147,20 +149,23 @@ class Movie:
                 words = paragraph.text
                 for h in self.phoneme_hacks:
                     words = words.replace(h, self.phoneme_hacks[h])
-                words = re.sub(r"[^A-Za-z0-9]", " ", words)
+                words = re.sub(r"[^A-Za-z0-9,.!?:;~]", " ", words)
                 words = list(i for i in words.split(" ") if len(i))
                 for word in words:
+                    stripped_word = re.sub(r"[^A-Za-z0-9]", "", word)
                     word_data = words_data[word_index]
-                    assert word_data["word"] == word
+                    assert word_data["word"] == stripped_word
                     if word_data["alignedWord"] == "<unk>":
-                        print(f"Warning: Phonemes for word '{word}' unknown in scene {i+1} paragraph {j+1}")
+                        print(f"Warning: Phonemes for word '{stripped_word}' unknown in scene {i+1} paragraph {j+1}")
                     if "phones" not in word_data:
-                        print(f"Warning: Word '{word}' not found in audio in scene {i+1} paragraph {j+1}")
+                        print(f"Warning: Word '{stripped_word}' not found in audio in scene {i+1} paragraph {j+1}")
                     my_words.append(word_data)
                     if word_data["end"] > end_time:
                         end_time = word_data["end"]
                     if word_data["end"] > paragraph_end_time:
                         paragraph_end_time = word_data["end"]
+                    if word != stripped_word:
+                        paragraph.update_times.append(word_data["end"])
                     word_index += 1
                 paragraph.words_data = my_words
                 scene.paragraph_end_times[j] = paragraph_end_time

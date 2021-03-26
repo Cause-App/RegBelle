@@ -27,3 +27,7 @@ Add audio:
 ```bash
 ffmpeg -i silent.mp4 -i audio.wav -c:v copy -map 0:v:0 -map 1:a:0 -c:a aac -b:a 192k output.mp4
 ```
+
+## JSONS
+
+Dummy space character is `~`
