@@ -24,6 +24,7 @@ class Movie:
 
 
     def init(self, output_dir, force_overwrite_mouth_data=False, force_overwrite_transcript=False):
+        self.create_transcript(output_dir, hack=False, force_overwrite=force_overwrite_transcript)
         mouth_data = self.get_mouth_data(
             output_dir,
             force_overwrite_mouth_data=force_overwrite_mouth_data,
@@ -31,7 +32,15 @@ class Movie:
         )
         self.carve_mouth_data(mouth_data)
 
-    def create_transcript(self, output_dir, hack=False):
+    def create_transcript(self, output_dir, hack=False, force_overwrite=False):
+        directory = os.path.join(output_dir, self.name)
+        filename = os.path.join(directory, "hacked-transcript.txt" if hack else "transcript.txt")
+        if os.path.exists(filename):
+            if not force_overwrite and not (tools.confirm(f"Would you like to overwrite the {'hacked ' if hack else ''}transcript file?") == "y"):
+                with open(filename, "r") as file:
+                    all_text = file.read()
+                return all_text
+
         text = []
         for scene in self.scenes:
             t = []
@@ -41,11 +50,6 @@ class Movie:
 
         all_text = "\n\n".join(text)
 
-        if output_dir is None:
-            return all_text
-
-        directory = os.path.join(output_dir, self.name)
-
         if not os.path.exists(directory):
             os.makedirs(directory)
         
@@ -53,7 +57,7 @@ class Movie:
             for h in self.phoneme_hacks:
                 all_text = all_text.replace(h, self.phoneme_hacks[h])
 
-        with open(os.path.join(directory, "hacked-transcript.txt" if hack else "transcript.txt"), "w") as file:
+        with open(filename, "w") as file:
             file.write(all_text)
 
         return all_text
@@ -71,14 +75,7 @@ class Movie:
 
         transcript_file = os.path.join(output_dir, self.name, "hacked-transcript.txt")
 
-        if os.path.exists(transcript_file):
-            if force_overwrite_transcript:
-                self.create_transcript(output_dir, hack=True)
-            else:
-                if (tools.confirm("Would you like to overwrite the transcript file?") == "y"):
-                    self.create_transcript(output_dir, hack=True)
-        else:
-            self.create_transcript(output_dir, hack=True)
+        self.create_transcript(output_dir, hack=True, force_overwrite=force_overwrite_transcript)
 
         process = subprocess.Popen(
             [
