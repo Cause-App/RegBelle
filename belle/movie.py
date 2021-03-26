@@ -5,6 +5,7 @@ import subprocess
 import re
 import wave
 import contextlib
+import shutil
 from . import tools
 
 
@@ -23,7 +24,7 @@ class Movie:
             self.duration = frames / float(rate)
 
 
-    def init(self, output_dir, force_overwrite_mouth_data=False, force_overwrite_transcript=False):
+    def init(self, output_dir, force_overwrite_mouth_data=False, force_overwrite_transcript=False, force_overwrite_audio=False, force_delete_frames=False):
         self.create_transcript(output_dir, hack=False, force_overwrite=force_overwrite_transcript)
         mouth_data = self.get_mouth_data(
             output_dir,
@@ -31,6 +32,37 @@ class Movie:
             force_overwrite_transcript=force_overwrite_transcript
         )
         self.carve_mouth_data(mouth_data)
+        self.copy_audio(output_dir, force_overwrite=force_overwrite_audio)
+        self.delete_frames(output_dir, force_delete=force_delete_frames)
+
+    def copy_audio(self, output_dir, force_overwrite=False):
+        directory = os.path.join(output_dir, self.name)
+        basename = os.path.basename(self.audio)
+        filename = os.path.join(directory, basename)
+        if os.path.exists(filename):
+            if not force_overwrite and not (tools.confirm(f"'{basename}' already exists in the output directory. Would you like to overwrite it?") == "y"):
+                return
+        
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        shutil.copyfile(self.audio, filename)
+
+
+    def delete_frames(self, output_dir, force_delete=False):
+        directory = os.path.join(output_dir, self.name, "frames")
+        if os.path.exists(directory):
+            contents = os.listdir(directory)
+            if len(contents) > 0 and not force_delete and not (tools.confirm(f"The output frames directory is not empty. Would you like to empty it?") == "y"):
+                return
+            for filename in contents:
+                filepath = os.path.join(directory, filename)
+                if os.path.isfile(filepath) or os.path.islink(filepath):
+                    os.unlink(filepath)
+                elif os.path.isdir(filepath):
+                    shutil.rmtree(filepath)
+        else:
+            os.makedirs(directory)
 
     def create_transcript(self, output_dir, hack=False, force_overwrite=False):
         directory = os.path.join(output_dir, self.name)
