@@ -14,10 +14,11 @@ def parse_movie(movies_dir, actors_dir, movie_name):
     
     width = movie_data["width"]
     height = movie_data["height"]
+    framerate = movie_data["framerate"]
     audio = os.path.join(movie_dir, movie_data["audio"])
     scenes = list(parse_scene(movie_dir, actors_dir, x) for x in movie_data["scenes"])
 
-    return Movie(movie_name, [width, height], audio, scenes)
+    return Movie(movie_name, [width, height], framerate, audio, scenes)
 
 def parse_scene(movie_dir, actors_dir, scene):
     background_data = scene["background"]

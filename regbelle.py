@@ -1,6 +1,6 @@
 #!/usr/bin/python3.9
 
-from belle import parse
+from belle import parse, belleroom
 
 # TODO
 # Read these from the command line
@@ -10,7 +10,6 @@ actors_dir = "./actors"
 movie_name = "test"
 
 movie = parse.parse_movie(movies_dir, actors_dir, movie_name)
+movie.init(output_dir)
 
-mouth_data = movie.get_mouth_data(output_dir)
-
-print(mouth_data)
+room = belleroom.BelleRoom(movie)
