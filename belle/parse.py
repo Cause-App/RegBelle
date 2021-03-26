@@ -49,10 +49,11 @@ def parse_actor(actors_dir, actor):
     width = actor["width"]
     height = actor["height"]
 
-    actor_json = os.path.join(actors_dir, name, "actor.json")
+    base_dir = os.path.join(actors_dir, name)
+    actor_json = os.path.join(base_dir, "actor.json")
     with open(actor_json, "r") as file:
         actor_data = json.loads(file.read())
     
     graphics = actor_data["graphics"]
 
-    return Actor(speaking, graphics, mood, mouth_style, [x, y], [width, height])
+    return Actor(base_dir, speaking, graphics, mood, mouth_style, [x, y], [width, height])

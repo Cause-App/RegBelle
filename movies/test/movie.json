@@ -2,7 +2,7 @@
     "audio": "audio.wav",
     "width": 640,
     "height": 360,
-    "framerate": 30,
+    "framerate": 24,
     "scenes": [
         {
             "background": {
@@ -21,10 +21,10 @@
                             "speaking": true,
                             "mood": "happy",
                             "mouthStyle": "smile",
-                            "x": 0,
-                            "y": 0,
-                            "width": 50,
-                            "height": null
+                            "x": 100,
+                            "y": 200,
+                            "width": null,
+                            "height": 300
                         }
                     ],
                     "text": "All the birds died in nineteen-eighty-six"
@@ -36,10 +36,10 @@
                             "speaking": true,
                             "mood": "explainy",
                             "mouthStyle": "smile",
-                            "x": 100,
+                            "x": 500,
                             "y": 100,
-                            "width": 100,
-                            "height": null
+                            "width": null,
+                            "height": 200
                         }
                     ],
                     "text": "due to Reagan killing them and replacing them with spies that are now watching us."
@@ -63,10 +63,10 @@
                             "speaking": true,
                             "mood": "explainy",
                             "mouthStyle": "smile",
-                            "x": 100,
-                            "y": 100,
-                            "width": 300,
-                            "height": null
+                            "x": 320,
+                            "y": 420,
+                            "width": null,
+                            "height": 600
                         }
                     ],
                     "text": "The birds work for the bourgeoisie."

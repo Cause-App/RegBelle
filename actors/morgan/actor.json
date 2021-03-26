@@ -4,13 +4,13 @@
             "happy": [
                 {
                     "artwork": "body/happy/happy-1.svg",
-                    "mouthX": 0,
-                    "mouthY": 0
+                    "mouthX": 0.47,
+                    "mouthY": 0.235
                 },
                 {
                     "artwork": "body/happy/happy-2.svg",
-                    "mouthX": 0,
-                    "mouthY": 0
+                    "mouthX": 0.48,
+                    "mouthY": 0.235
                 }
             ],
             "explainy": [
@@ -64,12 +64,12 @@
             },
             "oo,r": {
                 "smile": {
-                    "default": "mouth/oor,r/smile/default.svg",
-                    "tween-openVowels": "mouth/openVowels/smile/tween-oor,r.svg",
-                    "tween-y,l": "mouth/y,l/smile/tween-oor,r.svg",
-                    "tween-m,p,b": "mouth/oor,r/smile/tween-m,p,b.svg",
-                    "tween-f,v": "mouth/oor,r/smile/tween-f,v.svg",
-                    "tween-d,g,k,th": "mouth/oor,r/smile/tween-d,g,k,th.svg"
+                    "default": "mouth/oo,r/smile/default.svg",
+                    "tween-openVowels": "mouth/openVowels/smile/tween-oo,r.svg",
+                    "tween-y,l": "mouth/y,l/smile/tween-oo,r.svg",
+                    "tween-m,p,b": "mouth/oo,r/smile/tween-m,p,b.svg",
+                    "tween-f,v": "mouth/oo,r/smile/tween-f,v.svg",
+                    "tween-d,g,k,th": "mouth/oo,r/smile/tween-d,g,k,th.svg"
                 }
             },
             "m,p,b": {

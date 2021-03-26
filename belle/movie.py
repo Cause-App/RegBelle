@@ -126,3 +126,10 @@ class Movie:
             if end_time > time:
                 return self.scenes[i]
         return None
+
+    def render_frame(self, time):
+        scene = self.which_scene(time)
+        if scene is None:
+            return None
+        
+        return scene.render_frame(time, *self.resolution)
