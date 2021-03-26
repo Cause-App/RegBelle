@@ -1,6 +1,8 @@
 import numpy as np
 from . import tools
 
+MOUTH_TWEEN_TIME = 0.01
+
 class Paragraph:
     def __init__(self, actors, text):
         self.actors = actors
@@ -24,10 +26,14 @@ class Paragraph:
         # TODO
         # Handle updating the actor's index
 
+        last_phone = self.which_phone(time-MOUTH_TWEEN_TIME)
         phone = self.which_phone(time)
 
+        if last_phone is None:
+            last_phone = phone
+
         for actor in self.actors:
-            body_img, mouth_img, body_pos, mouth_pos = actor.get_graphic(phone if actor.speaking else None)
+            body_img, mouth_img, body_pos, mouth_pos = actor.get_graphic(phone if actor.speaking else None, last_phone if actor.speaking else None)
             tools.overlay_image(image, body_img, *body_pos)
             tools.overlay_image(image, mouth_img, *mouth_pos)
 

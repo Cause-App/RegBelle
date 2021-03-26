@@ -45,7 +45,7 @@ def load_image(path, width, height, scale=None, interpolation=cv2.INTER_AREA):
     if img.shape[2] == 3:
         img = cv2.cvtColor(img, cv2.COLOR_RGB2RGBA)
 
-    return img, scale
+    return img
 
 def overlay_image(base, overlay, x, y):
     base_height, base_width, _ = base.shape
@@ -107,6 +107,7 @@ def phone_to_mouth_type(phone):
         for i in mouth_types:
             if p in mouth_types[i]:
                 return i
+        print(f"Warning. Phoneme not found: ${phone}")
         return "d,g,k,th"
     
     return "m,p,b"

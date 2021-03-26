@@ -8,9 +8,9 @@
             "background": {
                 "color": [255, 255, 255],
                 "image": "images/birds.jpeg",
-                "x": 0,
-                "y": 0,
-                "width": 640,
+                "x": 0.5,
+                "y": 0.5,
+                "width": 1,
                 "height": null
             },
             "paragraphs": [
@@ -21,10 +21,9 @@
                             "speaking": true,
                             "mood": "happy",
                             "mouthStyle": "smile",
-                            "x": 100,
-                            "y": 200,
-                            "width": null,
-                            "height": 300
+                            "x": 0.2,
+                            "y": 0.6,
+                            "scale": 0.3
                         }
                     ],
                     "text": "All the birds died in nineteen-eighty-six"
@@ -36,10 +35,9 @@
                             "speaking": true,
                             "mood": "explainy",
                             "mouthStyle": "smile",
-                            "x": 500,
-                            "y": 100,
-                            "width": null,
-                            "height": 200
+                            "x": 0.8,
+                            "y": 0.2,
+                            "scale": 0.15
                         }
                     ],
                     "text": "due to Reagan killing them and replacing them with spies that are now watching us."
@@ -50,9 +48,9 @@
             "background": {
                 "color": [255, 0, 0],
                 "image": "images/communism.svg",
-                "x": 100,
-                "y": 0,
-                "width": 540,
+                "x": 0.5,
+                "y": 0.5,
+                "width": 1,
                 "height": null
             },
             "paragraphs": [
@@ -63,15 +61,17 @@
                             "speaking": true,
                             "mood": "explainy",
                             "mouthStyle": "smile",
-                            "x": 320,
-                            "y": 420,
-                            "width": null,
-                            "height": 600
+                            "x": 0.5,
+                            "y": 1.4,
+                            "scale": 1.2
                         }
                     ],
                     "text": "The birds work for the bourgeoisie."
                 }
             ]
         }
-    ]
+    ],
+    "phonemeHacks": {
+        "bourgeoisie": "boar jar sea"
+    }
 }

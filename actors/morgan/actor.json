@@ -16,90 +16,80 @@
             "explainy": [
                 {
                     "artwork": "body/explainy/explainy-1.svg",
-                    "mouthX": 0,
-                    "mouthY": 0
+                    "mouthX": 0.48,
+                    "mouthY": 0.235
                 },
                 {
                     "artwork": "body/explainy/explainy-2.svg",
-                    "mouthX": 0,
-                    "mouthY": 0
+                    "mouthX": 0.48,
+                    "mouthY": 0.235
                 },
                 {
                     "artwork": "body/explainy/explainy-3.svg",
-                    "mouthX": 0,
-                    "mouthY": 0
+                    "mouthX": 0.48,
+                    "mouthY": 0.235
                 },
                 {
                     "artwork": "body/explainy/explainy-4.svg",
-                    "mouthX": 0,
-                    "mouthY": 0
+                    "mouthX": 0.48,
+                    "mouthY": 0.235
                 },
                 {
                     "artwork": "body/explainy/explainy-5.svg",
-                    "mouthX": 0,
-                    "mouthY": 0
+                    "mouthX": 0.48,
+                    "mouthY": 0.235
                 }
             ]
         },
         "mouth": {
-            "openVowels": {
-                "smile": {
-                    "default": "mouth/openVowels/smile/default.svg",
-                    "tween-y,l": "mouth/openVowels/smile/tween-y,l.svg",
-                    "tween-oo,r": "mouth/openVowels/smile/tween-oo,r.svg",
-                    "tween-m,p,b": "mouth/openVowels/smile/tween-m,p,b.svg",
-                    "tween-f,v": "mouth/openVowels/smile/tween-f,v.svg",
-                    "tween-d,g,k,th": "mouth/openVowels/smile/tween-d,g,k,th.svg"
-                }
-            },
-            "y,l": {
-                "smile": {
-                    "default": "mouth/y,l/smile/default.svg",
-                    "tween-openVowels": "mouth/openVowels/smile/tween-y,l.svg",
-                    "tween-oo,r": "mouth/y,l/smile/tween-oo,r.svg",
-                    "tween-m,p,b": "mouth/y,l/smile/tween-m,p,b.svg",
-                    "tween-f,v": "mouth/y,l/smile/tween-f,v.svg",
-                    "tween-d,g,k,th": "mouth/y,l/smile/tween-d,g,k,th.svg"
-                }
-            },
-            "oo,r": {
-                "smile": {
-                    "default": "mouth/oo,r/smile/default.svg",
-                    "tween-openVowels": "mouth/openVowels/smile/tween-oo,r.svg",
-                    "tween-y,l": "mouth/y,l/smile/tween-oo,r.svg",
-                    "tween-m,p,b": "mouth/oo,r/smile/tween-m,p,b.svg",
-                    "tween-f,v": "mouth/oo,r/smile/tween-f,v.svg",
-                    "tween-d,g,k,th": "mouth/oo,r/smile/tween-d,g,k,th.svg"
-                }
-            },
-            "m,p,b": {
-                "smile": {
-                    "default": "mouth/m,p,b/smile/default.svg",
-                    "tween-openVowels": "mouth/openVowels/smile/tween-m,p,b.svg",
-                    "tween-y,l": "mouth/y,l/smile/tween-m,p,b.svg",
-                    "tween-oo,r": "mouth/oo,r/smile/tween-m,p,b.svg",
-                    "tween-f,v": "mouth/m,p,b/smile/tween-f,v.svg",
-                    "tween-d,g,k,th": "mouth/m,p,b/smile/tween-d,g,k,th.svg"
-                }
-            },
-            "f,v": {
-                "smile": {
-                    "default": "mouth/f,v/smile/default.svg",
-                    "tween-openVowels": "mouth/openVowels/smile/tween-f,v.svg",
-                    "tween-y,l": "mouth/y,l/smile/tween-f,v.svg",
-                    "tween-oo,r": "mouth/oo,r/smile/tween-f,v.svg",
-                    "tween-m,p,b": "mouth/m,p,b/smile/tween-f,v.svg",
-                    "tween-d,g,k,th": "mouth/f,v/smile/tween-d,g,k,th.svg"
-                }
-            },
-            "d,g,k,th": {
-                "smile": {
-                    "default": "mouth/d,g,k,th/smile/default.svg",
-                    "tween-openVowels": "mouth/openVowels/smile/tween-d,g,k,th.svg",
-                    "tween-y,l": "mouth/y,l/smile/tween-d,g,k,th.svg",
-                    "tween-oo,r": "mouth/oo,r/smile/tween-d,g,k,th.svg",
-                    "tween-m,p,b": "mouth/m,p,b/smile/tween-d,g,k,th.svg",
-                    "tween-f,v": "mouth/f,v/smile/tween-d,g,k,th.svg"
+            "smile": {
+                "openVowels": {
+                    "openVowels": "mouth/openVowels/smile/default.svg",
+                    "y,l": "mouth/openVowels/smile/tween-y,l.svg",
+                    "oo,r": "mouth/openVowels/smile/tween-oo,r.svg",
+                    "m,p,b": "mouth/openVowels/smile/tween-m,p,b.svg",
+                    "f,v": "mouth/openVowels/smile/tween-f,v.svg",
+                    "d,g,k,th": "mouth/openVowels/smile/tween-d,g,k,th.svg"
+                },
+                "y,l": {
+                    "openVowels": "mouth/openVowels/smile/tween-y,l.svg",
+                    "y,l": "mouth/y,l/smile/default.svg",
+                    "oo,r": "mouth/y,l/smile/tween-oo,r.svg",
+                    "m,p,b": "mouth/y,l/smile/tween-m,p,b.svg",
+                    "f,v": "mouth/y,l/smile/tween-f,v.svg",
+                    "d,g,k,th": "mouth/y,l/smile/tween-d,g,k,th.svg"
+                },
+                "oo,r": {
+                    "openVowels": "mouth/openVowels/smile/tween-oo,r.svg",
+                    "y,l": "mouth/y,l/smile/tween-oo,r.svg",
+                    "oo,r": "mouth/oo,r/smile/default.svg",
+                    "m,p,b": "mouth/oo,r/smile/tween-m,p,b.svg",
+                    "f,v": "mouth/oo,r/smile/tween-f,v.svg",
+                    "d,g,k,th": "mouth/oo,r/smile/tween-d,g,k,th.svg"
+                },
+                "m,p,b": {
+                    "openVowels": "mouth/openVowels/smile/tween-m,p,b.svg",
+                    "y,l": "mouth/y,l/smile/tween-m,p,b.svg",
+                    "oo,r": "mouth/oo,r/smile/tween-m,p,b.svg",
+                    "m,p,b": "mouth/m,p,b/smile/default.svg",
+                    "f,v": "mouth/m,p,b/smile/tween-f,v.svg",
+                    "d,g,k,th": "mouth/m,p,b/smile/tween-d,g,k,th.svg"
+                },
+                "f,v": {
+                    "openVowels": "mouth/openVowels/smile/tween-f,v.svg",
+                    "y,l": "mouth/y,l/smile/tween-f,v.svg",
+                    "oo,r": "mouth/oo,r/smile/tween-f,v.svg",
+                    "m,p,b": "mouth/m,p,b/smile/tween-f,v.svg",
+                    "f,v": "mouth/f,v/smile/default.svg",
+                    "d,g,k,th": "mouth/f,v/smile/tween-d,g,k,th.svg"
+                },
+                "d,g,k,th": {
+                    "openVowels": "mouth/openVowels/smile/tween-d,g,k,th.svg",
+                    "y,l": "mouth/y,l/smile/tween-d,g,k,th.svg",
+                    "oo,r": "mouth/oo,r/smile/tween-d,g,k,th.svg",
+                    "m,p,b": "mouth/m,p,b/smile/tween-d,g,k,th.svg",
+                    "f,v": "mouth/f,v/smile/tween-d,g,k,th.svg",
+                    "d,g,k,th": "mouth/d,g,k,th/smile/default.svg"
                 }
             }
         }
