@@ -21,7 +21,7 @@ class BelleRoom:
             os.makedirs(directory)
         filename = os.path.join(directory, f"{str(self.frame_number).zfill(7)}.png")
 
-        time = self.frame_number * self.dt
+        time = self.frame_number * self.dt + self.movie.start_time()
         
         image = self.movie.render_frame(time)
         if image is None:
@@ -37,7 +37,7 @@ class BelleRoom:
 
         self.frame_number += 1
 
-        proportion = int(100*(self.frame_number*self.dt)/self.movie.duration)
+        proportion = int(100*(self.frame_number*self.dt)/(self.movie.duration-self.movie.start_time()))
         if proportion != self.last_proportion:
             self.last_proportion = proportion
             print(f"{proportion}%")
@@ -54,6 +54,8 @@ class BelleRoom:
             [
                 "ffmpeg",
                 "-y",
+                "-r",
+                f"{self.framerate}",
                 "-i",
                 f"{directory}/%07d.png",
                 "-c:v",

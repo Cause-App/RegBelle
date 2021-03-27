@@ -6,7 +6,7 @@ from .scene import Scene
 from .paragraph import Paragraph
 from .actor import Actor
 
-def parse_movie(movies_dir, actors_dir, movie_name):
+def parse_movie(movies_dir, actors_dir, movie_name, start_scene=0):
     print("Parsing movie...")
     movie_dir = os.path.join(movies_dir, movie_name)
     movie_json = os.path.join(movie_dir, "movie.json")
@@ -20,7 +20,7 @@ def parse_movie(movies_dir, actors_dir, movie_name):
     scenes = list(parse_scene(movie_dir, actors_dir, x, width, height) for x in movie_data["scenes"])
     phoneme_hacks = movie_data["phonemeHacks"]
 
-    movie = Movie(movie_name, [width, height], framerate, audio, scenes, phoneme_hacks)
+    movie = Movie(movie_name, [width, height], framerate, audio, scenes, phoneme_hacks, start_scene=start_scene)
     print("Done parsing movie")
     return movie
 

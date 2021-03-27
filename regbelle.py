@@ -9,6 +9,7 @@ parser.add_argument("movie_name", help="The name of the project inside the movie
 parser.add_argument("-m", "--movies-dir", help="The directory in which all of your projects are found", type=str, default="./movies")
 parser.add_argument("-o", "--output-dir", help="The directory in which the output of all of your projects will be stored", type=str, default="./output")
 parser.add_argument("-a", "--actors-dir", help="The directory in which all of your actors are found", type=str, default="./actors")
+parser.add_argument("-s", "--start-scene", help="The first scene to render. Can be helpful for testing (indexes from 0)", type=int, default=0)
 parser.add_argument("-p", "--gentle-port", help="The port on which the gentle server is running", type=int, default=8765)
 parser.add_argument("-F", "--force", help="Forces overwriting to transcript, frames, etc.", action="store_true")
 parser.add_argument("-G", "--launch-gentle", help="If the gentle server is not listening on the specified port, launch it", action="store_true")
@@ -36,7 +37,7 @@ force_add_audio = args.force
 
 show = not args.hide
 
-movie = parse.parse_movie(movies_dir, actors_dir, movie_name)
+movie = parse.parse_movie(movies_dir, actors_dir, movie_name, start_scene=args.start_scene)
 
 if args.transcript_only:
     movie.create_transcript(output_dir, hack=False, force_overwrite=force_overwrite_transcript)

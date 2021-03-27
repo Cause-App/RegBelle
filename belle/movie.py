@@ -37,7 +37,7 @@ class PopenThread(threading.Thread):
                     break
 
 class Movie:
-    def __init__(self, name, resolution, framerate, audio, scenes, phoneme_hacks):
+    def __init__(self, name, resolution, framerate, audio, scenes, phoneme_hacks, start_scene=0):
         self.name = name
         self.resolution = resolution
         self.framerate = framerate
@@ -45,6 +45,7 @@ class Movie:
         self.scenes = scenes
         self.scene_end_times = [0] * len(scenes)
         self.phoneme_hacks = phoneme_hacks
+        self.start_scene = start_scene
         with contextlib.closing(wave.open(self.audio, 'r')) as f:
             frames = f.getnframes()
             rate = f.getframerate()
@@ -65,6 +66,11 @@ class Movie:
         self.copy_audio(output_dir, force_overwrite=force_overwrite_audio)
         self.delete_frames(output_dir, force_delete=force_delete_frames)
         print("Done initializing movie")
+    
+    def start_time(self):
+        if self.start_scene == 0:
+            return 0
+        return self.scene_end_times[self.start_scene-1]
 
     def copy_audio(self, output_dir, force_overwrite=False):
         directory = os.path.join(output_dir, self.name)
