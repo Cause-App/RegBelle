@@ -46,10 +46,13 @@ class Movie:
         self.scene_end_times = [0] * len(scenes)
         self.phoneme_hacks = phoneme_hacks
         self.start_scene = start_scene
-        with contextlib.closing(wave.open(self.audio, 'r')) as f:
-            frames = f.getnframes()
-            rate = f.getframerate()
-            self.duration = frames / float(rate)
+        if audio is not None:
+            with contextlib.closing(wave.open(self.audio, 'r')) as f:
+                frames = f.getnframes()
+                rate = f.getframerate()
+                self.duration = frames / float(rate)
+        else:
+            self.duration = None
 
     def init(self, output_dir, gentle_port, force_overwrite_mouth_data=False, force_overwrite_transcript=False, force_overwrite_audio=False, force_delete_frames=False, launch_gentle=False):
         print("Initializing movie...")

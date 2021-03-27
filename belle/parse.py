@@ -6,7 +6,7 @@ from .scene import Scene
 from .paragraph import Paragraph
 from .actor import Actor
 
-def parse_movie(movies_dir, actors_dir, movie_name, start_scene=0):
+def parse_movie(movies_dir, actors_dir, movie_name, start_scene=0, transcript_only=False):
     print("Parsing movie...")
     movie_dir = os.path.join(movies_dir, movie_name)
     movie_json = os.path.join(movie_dir, "movie.json")
@@ -16,7 +16,7 @@ def parse_movie(movies_dir, actors_dir, movie_name, start_scene=0):
     width = movie_data["width"]
     height = movie_data["height"]
     framerate = movie_data["framerate"]
-    audio = os.path.join(movie_dir, movie_data["audio"])
+    audio = os.path.join(movie_dir, movie_data["audio"]) if not transcript_only else None
     scenes = list(parse_scene(movie_dir, actors_dir, x, width, height) for x in movie_data["scenes"])
     phoneme_hacks = movie_data["phonemeHacks"]
 
@@ -26,12 +26,19 @@ def parse_movie(movies_dir, actors_dir, movie_name, start_scene=0):
 
 def parse_scene(movie_dir, actors_dir, scene, width, height):
     background_data = scene["background"]
-    background_color = background_data["color"]
-    background_image = os.path.join(movie_dir, background_data["image"])
-    background_width = round(background_data["width"]*width) if background_data["width"] is not None else None
-    background_height = round(background_data["height"]*height) if background_data["height"] is not None else None
-    background_x = background_data["x"]*width
-    background_y = background_data["y"]*height
+    background_color = background_data["color"] if "color" in background_data else [255, 255, 255]
+    if "image" in background_data:
+        background_image = os.path.join(movie_dir, background_data["image"])
+        background_width = round(background_data["width"]*width) if background_data["width"] is not None else None
+        background_height = round(background_data["height"]*height) if background_data["height"] is not None else None
+        background_x = background_data["x"]*width
+        background_y = background_data["y"]*height
+    else:
+        background_image = None
+        background_width = None
+        background_height = None
+        background_x = None
+        background_y = None
 
 
     paragraphs = list(parse_paragraph(actors_dir, x, width, height) for x in scene["paragraphs"])
@@ -41,6 +48,8 @@ def parse_scene(movie_dir, actors_dir, scene, width, height):
 def parse_paragraph(actors_dir, paragraph, width, height):
     actors = list(parse_actor(actors_dir, x, width, height) for x in paragraph["actors"])
     text = paragraph["text"]
+    if type(text) == list:
+        text = " ".join(text)
 
     return Paragraph(actors, text)
 
