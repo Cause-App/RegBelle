@@ -218,11 +218,13 @@ class Movie:
                 words = paragraph.text
                 for h in self.phoneme_hacks:
                     words = words.replace(h, self.phoneme_hacks[h])
-                words = re.sub(r"[^A-Za-z0-9,.!?:;~]", " ", words)
+                words = re.sub(r"[^A-Za-z0-9',.!?:;~]", " ", words)
                 words = list(i for i in words.split(" ") if len(i))
                 for word in words:
-                    stripped_word = re.sub(r"[^A-Za-z0-9]", "", word)
+                    stripped_word = re.sub(r"[^A-Za-z0-9']", "", word)
                     word_data = words_data[word_index]
+                    if word_data["word"] != stripped_word:
+                        print(word_data["word"], stripped_word)
                     assert word_data["word"] == stripped_word
                     if word_data["alignedWord"] == "<unk>":
                         print(
