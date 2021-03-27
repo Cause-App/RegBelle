@@ -1,2 +1,5 @@
 __pycache__
 frames
+/mouth-pos-tool/**/node_modules
+/mouth-pos-tool/**/package-lock.json
+/mouth-pos-tool/**/dist

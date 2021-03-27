@@ -1,0 +1,29 @@
+<div class="controls">
+    <div>
+        <label>
+            Body
+            <input type="file" (change)="onFileUploaded('body', $event)" accept="image/*">
+        </label>
+        
+        
+        <label>
+            Mouth
+            <input type="file" (change)="onFileUploaded('mouth', $event)" accept="image/*">
+        </label>    
+    </div>
+    <div>
+        <label>
+            x
+            <input type="number" [(ngModel)]="x" min="0" max="1">
+        </label>
+        <label>
+            y
+            <input type="number" [(ngModel)]="y" min="0" max="1">
+        </label>
+    </div>
+</div>
+
+<div class="container">
+    <img id="bodyImage" [src]="bodyImage">
+    <img id="mouthImage" [src]="mouthImage" [ngStyle]="getMouthStyle()">
+</div>

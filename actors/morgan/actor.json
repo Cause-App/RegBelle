@@ -16,28 +16,28 @@
             "explainy": [
                 {
                     "artwork": "body/explainy/explainy-1.svg",
-                    "mouthX": 0.48,
+                    "mouthX": 0.45,
                     "mouthY": 0.235
                 },
                 {
                     "artwork": "body/explainy/explainy-2.svg",
-                    "mouthX": 0.48,
+                    "mouthX": 0.39,
                     "mouthY": 0.235
                 },
                 {
                     "artwork": "body/explainy/explainy-3.svg",
-                    "mouthX": 0.48,
+                    "mouthX": 0.435,
                     "mouthY": 0.235
                 },
                 {
                     "artwork": "body/explainy/explainy-4.svg",
-                    "mouthX": 0.48,
+                    "mouthX": 0.33,
                     "mouthY": 0.235
                 },
                 {
                     "artwork": "body/explainy/explainy-5.svg",
-                    "mouthX": 0.48,
-                    "mouthY": 0.235
+                    "mouthX": 0.42,
+                    "mouthY": 0.23
                 }
             ]
         },
