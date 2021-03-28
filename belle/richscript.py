@@ -61,7 +61,7 @@ def generate_rich_script(movie, output_dir, force_overwrite=False):
 
             content += background_image_template.format(image=encoded_string)
         
-        content += "<br /><br/>"
+            content += "<br /><br/>"
 
         for p in scene.paragraphs:
             text = h.escape(p.text)
