@@ -16,7 +16,7 @@ parser.add_argument("-G", "--launch-gentle", help="If the gentle server is not l
 parser.add_argument("-H", "--hide", help="Don't show the frames of the video while it is rendering", action="store_true")
 parser.add_argument("-S", "--stitch", help="Stitch the frames together into an mp4 file after rendering", action="store_true")
 parser.add_argument("-A", "--overlay-audio", help="Overlay the training audio on the rendered video. Use with --stitch", action="store_true")
-parser.add_argument("-T", "--transcript-only", help="Only write a transcript and then exit. Do not render the video", action="store_true")
+parser.add_argument("-R", "--rich-script-only", help="Only write a rich script and then exit. Do not render the video", action="store_true")
 
 args = parser.parse_args()
 
@@ -31,6 +31,7 @@ launch_gentle = args.launch_gentle
 force_overwrite_mouth_data = args.force
 force_overwrite_transcript = args.force
 force_overwrite_audio = args.force
+force_overwrite_rich_script = args.force
 force_overwrite_movie_json = args.force
 force_delete_frames = args.force
 force_stitch = args.force
@@ -38,11 +39,10 @@ force_add_audio = args.force
 
 show = not args.hide
 
-movie = parse.parse_script(movies_dir, actors_dir, movie_name, start_scene=args.start_scene, transcript_only=args.transcript_only, force_overwrite_movie_json=force_overwrite_movie_json)
+movie = parse.parse_script(movies_dir, actors_dir, movie_name, start_scene=args.start_scene, rich_script_only=args.rich_script_only, force_overwrite_movie_json=force_overwrite_movie_json)
 
-if args.transcript_only:
-    movie.create_transcript(output_dir, hack=False, force_overwrite=force_overwrite_transcript)
-else:
+movie.create_rich_script(output_dir, force_overwrite=force_overwrite_rich_script)
+if not args.rich_script_only:
     movie.init(output_dir, gentle_port, force_overwrite_mouth_data=force_overwrite_mouth_data, force_overwrite_transcript=force_overwrite_transcript, force_overwrite_audio=force_overwrite_audio, force_delete_frames=force_delete_frames, launch_gentle=launch_gentle)
 
     room = belleroom.BelleRoom(movie)

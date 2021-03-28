@@ -9,6 +9,7 @@ import shutil
 import threading
 import time
 from . import tools
+from . import richscript
 
 class Lock:
     def __init__(self):
@@ -136,6 +137,9 @@ class Movie:
             file.write(all_text)
 
         return all_text
+    
+    def create_rich_script(self, output_dir, force_overwrite=False):
+        richscript.generate_rich_script(self, output_dir, force_overwrite=force_overwrite)
 
     def get_mouth_data(self, output_dir, gentle_port, force_overwrite_mouth_data=False, force_overwrite_transcript=False, launch_gentle=False):
         print("Getting mouth data")
