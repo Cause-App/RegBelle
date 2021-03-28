@@ -5,6 +5,23 @@ from .movie import Movie
 from .scene import Scene
 from .paragraph import Paragraph
 from .actor import Actor
+from . import tools
+from . import scriptparser
+
+def parse_script(movies_dir, actors_dir, movie_name, start_scene=0, transcript_only=False, force_overwrite_movie_json=False):
+    movie_dir = os.path.join(movies_dir, movie_name)
+    movie_json = os.path.join(movie_dir, "movie.json")
+    if not os.path.exists(movie_json) or force_overwrite_movie_json or tools.confirm(f"'movie.json' already exists in the movie directory. Would you like to overwrite it?") == "y":
+        print("Parsing script")
+        script_file = os.path.join(movie_dir, "script.regbelle")
+        with open(script_file, "r") as file:
+            lines = [line.strip().replace("\t", "") for line in file.readlines()]
+        movie_data = scriptparser.parse_script(lines)
+        with open(movie_json, "w") as file:
+            file.write(json.dumps(movie_data))
+    
+    return parse_movie(movies_dir, actors_dir, movie_name, start_scene, transcript_only=transcript_only)
+
 
 def parse_movie(movies_dir, actors_dir, movie_name, start_scene=0, transcript_only=False):
     print("Parsing movie...")
@@ -27,7 +44,7 @@ def parse_movie(movies_dir, actors_dir, movie_name, start_scene=0, transcript_on
 def parse_scene(movie_dir, actors_dir, scene, width, height):
     background_data = scene["background"]
     background_color = background_data["color"] if "color" in background_data else [255, 255, 255]
-    if "image" in background_data:
+    if "image" in background_data and background_data["image"] is not None:
         background_image = os.path.join(movie_dir, background_data["image"])
         background_width = round(background_data["width"]*width) if background_data["width"] is not None else None
         background_height = round(background_data["height"]*height) if background_data["height"] is not None else None
@@ -62,8 +79,8 @@ def parse_actor(actors_dir, actor, width, height):
         scale_x = actor["scale"]
         scale_y = actor["scale"]
     else:
-        scale_x = actor["scale_x"]
-        scale_y = actor["scale_y"]
+        scale_x = actor["scaleX"]
+        scale_y = actor["scaleY"]
 
     scale_x *= height/1000
     scale_y *= height/1000

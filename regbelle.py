@@ -31,13 +31,14 @@ launch_gentle = args.launch_gentle
 force_overwrite_mouth_data = args.force
 force_overwrite_transcript = args.force
 force_overwrite_audio = args.force
+force_overwrite_movie_json = args.force
 force_delete_frames = args.force
 force_stitch = args.force
 force_add_audio = args.force
 
 show = not args.hide
 
-movie = parse.parse_movie(movies_dir, actors_dir, movie_name, start_scene=args.start_scene, transcript_only=args.transcript_only)
+movie = parse.parse_script(movies_dir, actors_dir, movie_name, start_scene=args.start_scene, transcript_only=args.transcript_only, force_overwrite_movie_json=force_overwrite_movie_json)
 
 if args.transcript_only:
     movie.create_transcript(output_dir, hack=False, force_overwrite=force_overwrite_transcript)
