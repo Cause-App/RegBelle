@@ -2,6 +2,33 @@
 
 A somewhat automated animation engine. Automatically lip sync an animated character to your voice.
 
+## Usage
+
+    usage: regbelle.py [-h] [-m MOVIES_DIR] [-o OUTPUT_DIR] [-a ACTORS_DIR] [-s START_SCENE] [-p GENTLE_PORT] [-F] [-G] [-H] [-S] [-A] [-R] movie_name
+
+    positional arguments:
+    movie_name            The name of the project inside the movies directory
+
+    optional arguments:
+    -h, --help            show this help message and exit
+    -m MOVIES_DIR, --movies-dir MOVIES_DIR
+                            The directory in which all of your projects are found
+    -o OUTPUT_DIR, --output-dir OUTPUT_DIR
+                            The directory in which the output of all of your projects will be stored
+    -a ACTORS_DIR, --actors-dir ACTORS_DIR
+                            The directory in which all of your actors are found
+    -s START_SCENE, --start-scene START_SCENE
+                            The first scene to render. Can be helpful for testing (indexes from 0)
+    -p GENTLE_PORT, --gentle-port GENTLE_PORT
+                            The port on which the gentle server is running
+    -F, --force           Forces overwriting to transcript, frames, etc.
+    -G, --launch-gentle   If the gentle server is not listening on the specified port, launch it
+    -H, --hide            Don't show the frames of the video while it is rendering
+    -S, --stitch          Stitch the frames together into an mp4 file after rendering
+    -A, --overlay-audio   Overlay the training audio on the rendered video. Use with --stitch
+    -R, --rich-script-only
+                            Only write a rich script and then exit. Do not render the video
+
 ## Creating an actor
 
 An actor consists of three elements:
