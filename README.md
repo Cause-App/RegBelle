@@ -182,6 +182,8 @@ The other lines of the file should contain text to be spoken.
 
 You can use a tilde (`~`) character to denote that the speaking actor/s should change pose at that point. Other than that, they will change pose when a punctuation mark is reached, and, of course, when their mood is changed.
 
+You can write a comment in the script file by starting the line with `//`. This line will then be ignored by the parser.
+
 ## Generating a rich script
 
 It can be difficult to record yourself reading straight from the `script.regbelle` file because of all the commands in the way, and because you can't see which background images are being displayed.
