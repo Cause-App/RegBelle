@@ -2,6 +2,9 @@
 
 A somewhat automated animation engine. Automatically lip sync an animated character to your voice.
 
+The idea comes from [this YouTube video by carykh](https://www.youtube.com/watch?v=y3B8YqeLCpY).
+
+
 ## Usage
 
     usage: regbelle.py [-h] [-m MOVIES_DIR] [-o OUTPUT_DIR] [-a ACTORS_DIR] [-s START_SCENE] [-p GENTLE_PORT] [-F] [-G] [-H] [-S] [-A] [-R] movie_name
