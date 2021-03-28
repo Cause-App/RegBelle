@@ -111,3 +111,6 @@ def phone_to_mouth_type(phone):
         return "d,g,k,th"
     
     return "m,p,b"
+
+def line_break(x, on, newline="\n"):
+    return f"{on}{newline}".join(x.split(on))

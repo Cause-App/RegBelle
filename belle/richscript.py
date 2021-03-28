@@ -43,9 +43,6 @@ template = """
 scene_heading_template = "<h1>Scene {number}</h1>"
 background_image_template = "<img src='{image}'>"
 
-def line_break(x, on):
-    return f"{on}<br />".join(x.split(on))
-
 def generate_rich_script(movie, output_dir, force_overwrite=False):
     print(f"Creating rich script")
     directory = os.path.join(output_dir, movie.name)
@@ -69,9 +66,8 @@ def generate_rich_script(movie, output_dir, force_overwrite=False):
         for p in scene.paragraphs:
             text = h.escape(p.text)
             for d in ".!?:":
-                text = line_break(text, d)
+                text = tools.line_break(text, d, "<br />")
             
-            print(text)
             content += text
     
     html = template.format(title=movie.name, content=content)
