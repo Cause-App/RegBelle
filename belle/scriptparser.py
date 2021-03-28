@@ -280,7 +280,7 @@ def parse_script(lines):
             
             handler(movie, movie_data, *parsed_args)
         
-        else:
+        elif not line.startswith("//"):
             movie_data["current-paragraph"]["text"].append(line)
 
     for scene in movie["scenes"]:
