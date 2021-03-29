@@ -28,8 +28,8 @@ template = """
         }}
 
         img {{
-            max-width: 300px;
-            max-height: 300px;
+            max-width: 700px;
+            max-height: 500px;
             border: 1px solid black;
         }}
     </style>
