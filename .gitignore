@@ -3,3 +3,7 @@ frames
 /mouth-pos-tool/**/node_modules
 /mouth-pos-tool/**/package-lock.json
 /mouth-pos-tool/**/dist
+/movies/**
+!/movies/test
+/output/**
+!/output/test

@@ -8,6 +8,7 @@
 :background-image-pos 0.5 0.5
 :background-image-size 1 -1
 :background-color 255 255 255
+
 :add-actor morgan m1
 :actor-speaking m1 true
 :actor-mouth-style m1 smile
