@@ -48,6 +48,8 @@ def generate_rich_script(movie, output_dir, force_overwrite=False):
     directory = os.path.join(output_dir, movie.name)
     filename = os.path.join(
         directory, "rich-script.html")
+    if not os.path.exists(directory):
+        os.makedirs(directory)
     if os.path.exists(filename):
         if not force_overwrite and not (tools.confirm(f"Would you like to overwrite the rich script file?") == "y"):
             return
