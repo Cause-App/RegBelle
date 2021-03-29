@@ -13,6 +13,8 @@ class Paragraph:
     
     def which_phone(self, time):
         for word in self.words_data:
+            if "start" not in word:
+                continue
             if word["start"] <= time < word["end"]:
                 offset = time - word["start"]
                 total_offset = 0

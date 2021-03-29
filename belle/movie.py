@@ -128,6 +128,8 @@ class Movie:
         if hack:
             for h in self.phoneme_hacks:
                 all_text = all_text.replace(h, self.phoneme_hacks[h])
+            
+            all_text = " ".join(x.strip("'\"`()[]") for x in  all_text.split(" "))
 
         all_text = all_text.replace("~", "")
 
@@ -223,7 +225,9 @@ class Movie:
                 words = re.sub(r"[^A-Za-z0-9',.!?:;~]", " ", words)
                 words = list(i for i in words.split(" ") if len(i))
                 for word in words:
-                    stripped_word = re.sub(r"[^A-Za-z0-9']", "", word)
+                    stripped_word = re.sub(r"[^A-Za-z0-9']", "", word).strip("'\"`()[]")
+                    if stripped_word == "":
+                        continue
                     word_data = words_data[word_index]
                     if word_data["word"] != stripped_word:
                         print(word_data["word"], stripped_word)
@@ -232,16 +236,17 @@ class Movie:
                         print(
                             f"Warning: Phonemes for word '{stripped_word}' unknown in scene {i} paragraph {j}")
                     if "phones" not in word_data:
-                        raise Exception(
-                            f"Word '{stripped_word}' not found in audio in scene {i} paragraph {j}")
-                        
+                        print(
+                            f"Warning: Word '{stripped_word}' not found in audio in scene {i} paragraph {j}")
+                    
                     my_words.append(word_data)
-                    if word_data["end"] > end_time:
-                        end_time = word_data["end"]
-                    if word_data["end"] > paragraph_end_time:
-                        paragraph_end_time = word_data["end"]
-                    if word != stripped_word:
-                        paragraph.update_times.append(word_data["end"])
+                    if "end" in word_data:
+                        if word_data["end"] > end_time:
+                            end_time = word_data["end"]
+                        if word_data["end"] > paragraph_end_time:
+                            paragraph_end_time = word_data["end"]
+                        if word != stripped_word:
+                            paragraph.update_times.append(word_data["end"])
                     word_index += 1
                 paragraph.words_data = my_words
                 scene.paragraph_end_times[j] = paragraph_end_time
