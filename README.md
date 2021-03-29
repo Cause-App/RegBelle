@@ -176,6 +176,10 @@ Here is a list of commands and the arguments they take
 
     sets the mood of the specified actor (e.g. `happy`, `explainy`)
 
+- `:scene`
+
+    starts a new scene
+
 The speaking character will pick a random one of the poses corresponding to the specified mood.
 
 The other lines of the file should contain text to be spoken.
@@ -184,7 +188,7 @@ You can use a tilde (`~`) character to denote that the speaking actor/s should c
 
 You can write a comment in the script file by starting the line with `//`. This line will then be ignored by the parser.
 
-The script file is whitespace agnostic, so tabs and multiple newlines are ignored.
+Leaving a blank line creates a new paragraph.
 
 ## Generating a rich script
 
