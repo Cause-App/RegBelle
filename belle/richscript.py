@@ -65,10 +65,8 @@ def generate_rich_script(movie, output_dir, force_overwrite=False):
 
         for p in scene.paragraphs:
             text = h.escape(p.text)
-            for d in ".!?:":
-                text = tools.line_break(text, d, "<br />")
             
-            content += text.replace("~", "")
+            content += text.replace("~", "") + "<br /><br />"
     
     html = template.format(title=movie.name, content=content)
     with open(filename, "w") as file:

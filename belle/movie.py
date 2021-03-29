@@ -117,14 +117,8 @@ class Movie:
 
         text = []
         for scene in self.scenes:
-            t = ""
             for paragraph in scene.paragraphs:
-                tx = paragraph.text
-                for d in ".!?:":
-                    tx = tools.line_break(tx, d)
-                
-                t += tx
-            text.append("\n".join([x.strip() for x in t.split("\n")]))
+                text.append(paragraph.text)
 
         all_text = "\n\n".join(text)
 

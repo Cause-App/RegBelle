@@ -257,8 +257,6 @@ def parse_script(lines):
     
     for i, line in enumerate(lines):
         error_heading = f"Script error on line {i+1}:"
-        if line == "":
-            continue
         if line.startswith(":"):
             args = parse_args(line[1:])
             if len(args) == 0:
@@ -281,7 +279,10 @@ def parse_script(lines):
             handler(movie, movie_data, *parsed_args)
         
         elif not line.startswith("//"):
-            movie_data["current-paragraph"]["text"].append(line)
+            if line == "":
+                new_paragraph(movie, movie_data)
+            else:
+                movie_data["current-paragraph"]["text"].append(line)
 
     for scene in movie["scenes"]:
         scene["paragraphs"] = [x for x in scene["paragraphs"] if len(x["text"]) > 0]
