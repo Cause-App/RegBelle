@@ -222,7 +222,8 @@ commands = {
     "actor-scale-x": [[str, float], actor_scale_x],
     "actor-scale-y": [[str, float], actor_scale_y],
     "actor-scale": [[str, float], actor_scale],
-    "actor-mood": [[str, str], actor_mood]
+    "actor-mood": [[str, str], actor_mood],
+    "scene": [[], new_scene]
 }
 
 def parse_script(lines):
