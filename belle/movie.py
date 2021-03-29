@@ -230,10 +230,10 @@ class Movie:
                     assert word_data["word"] == stripped_word
                     if "alignedWord" in word_data and word_data["alignedWord"] == "<unk>":
                         print(
-                            f"Warning: Phonemes for word '{stripped_word}' unknown in scene {i+1} paragraph {j+1}")
+                            f"Warning: Phonemes for word '{stripped_word}' unknown in scene {i} paragraph {j}")
                     if "phones" not in word_data:
                         raise Exception(
-                            f"Word '{stripped_word}' not found in audio in scene {i+1} paragraph {j+1}")
+                            f"Word '{stripped_word}' not found in audio in scene {i} paragraph {j}")
                         
                     my_words.append(word_data)
                     if word_data["end"] > end_time:
