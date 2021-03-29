@@ -184,6 +184,8 @@ You can use a tilde (`~`) character to denote that the speaking actor/s should c
 
 You can write a comment in the script file by starting the line with `//`. This line will then be ignored by the parser.
 
+The script file is whitespace agnostic, so tabs and multiple newlines are ignored.
+
 ## Generating a rich script
 
 It can be difficult to record yourself reading straight from the `script.regbelle` file because of all the commands in the way, and because you can't see which background images are being displayed.
