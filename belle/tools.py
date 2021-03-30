@@ -29,24 +29,26 @@ def load_image(path, width, height, scale=None, interpolation=cv2.INTER_AREA):
             img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)
         else:
             img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
-        im_height, im_width, _ = img.shape
-        if scale is None:
-            aspect = im_width/im_height
-            if width is None:
-                width = round(height * aspect)
-            if height is None:
-                height = round(width / aspect)
-
-            scale = [height/im_height, width/im_width]
-        else:
-            width = round(im_width*scale[0])
-            height = round(im_height*scale[1])
-        
-        img = cv2.resize(img, (width, height), interpolation=interpolation)
-        if img.shape[2] == 3:
-            img = cv2.cvtColor(img, cv2.COLOR_RGB2RGBA)
         cache[path] = img
-    return cache[path]
+    img = cache[path]
+    im_height, im_width, _ = img.shape
+    if scale is None:
+        aspect = im_width/im_height
+        if width is None:
+            width = round(height * aspect)
+        if height is None:
+            height = round(width / aspect)
+
+        scale = [height/im_height, width/im_width]
+    else:
+        width = round(im_width*scale[0])
+        height = round(im_height*scale[1])
+    
+    img = cv2.resize(img, (width, height), interpolation=interpolation)
+    if img.shape[2] == 3:
+        img = cv2.cvtColor(img, cv2.COLOR_RGB2RGBA)
+
+    return img
 
 def overlay_image(base, overlay, x, y):
     base_height, base_width, _ = base.shape
