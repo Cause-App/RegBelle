@@ -117,6 +117,7 @@ def background_color(movie, movie_data, r, g, b):
 def add_actor(movie, movie_data, name, label):
     new_actor = {
         "name": name,
+        "label": label
     }
     movie_data["actor-labels"][label] = len(movie_data["actors"])
     movie_data["actors"].append(new_actor)

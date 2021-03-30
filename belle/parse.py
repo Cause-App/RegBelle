@@ -81,6 +81,7 @@ def parse_paragraph(actors_dir, paragraph, width, height):
     return Paragraph(actors, text)
 
 def parse_actor(actors_dir, actor, width, height):
+    label = actor["label"]
     name = actor["name"]
     speaking = actor["speaking"]
     mood = actor["mood"]
@@ -107,4 +108,4 @@ def parse_actor(actors_dir, actor, width, height):
     
     graphics = actor_data["graphics"]
 
-    return Actor(name, base_dir, speaking, graphics, mood, mouth_style, [x, y], [scale_x, scale_y])
+    return Actor(label, name, base_dir, speaking, graphics, mood, mouth_style, [x, y], [scale_x, scale_y])
