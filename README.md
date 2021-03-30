@@ -100,6 +100,14 @@ Here is a list of commands and the arguments they take
 
     `:phoneme hack "bourgeoisie" "boar jar sea"`
 
+- `:min-silence-length [length]`
+
+    specifies the minimum length in seconds of silent sections of the audio. This is for if a word in the transcript is not found in the audio, the program knows when to keep the mouth closed and when to instead to filler lip syncing. If not specified the default is 0.5.
+
+- `:silence-thresh [thresh]`
+
+    specifies the threshold for silence measured in dBFS. If not specified, the default is -16.
+
 - `:background-image [path]`
 
     sets the path of the background image. This can be set multiple times to change the background image during the movie. Note that no file actually has to exist at that path if you are running the program in Rich Script Only mode, however if this is the case then the image will not appear in the rich script. This can also be set to `null` for no background image

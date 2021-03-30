@@ -1,6 +1,7 @@
 :resolution 640 360
 :framerate 24
 :audio audio.wav
+:silence-thresh -36
 
 :phoneme-hack bourgeoisie "boar jar sea"
 

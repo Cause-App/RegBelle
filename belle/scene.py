@@ -24,7 +24,7 @@ class Scene:
         
         return self.paragraphs[-1]
     
-    def render_frame(self, time, width, height):
+    def render_frame(self, time, width, height, silence):
         paragraph = self.which_paragraph(time)
         if paragraph is None:
             return None
@@ -42,6 +42,6 @@ class Scene:
 
             tools.overlay_image(image, self.background_image, *pos)
 
-        image = paragraph.render_frame(image, time)
+        image = paragraph.render_frame(image, time, silence)
 
         return image

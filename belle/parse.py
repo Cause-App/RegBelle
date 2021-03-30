@@ -37,7 +37,10 @@ def parse_movie(movies_dir, actors_dir, movie_name, start_scene=0, rich_script_o
     scenes = list(parse_scene(movie_dir, actors_dir, x, width, height, rich_script_only=rich_script_only) for x in movie_data["scenes"])
     phoneme_hacks = movie_data["phonemeHacks"]
 
-    movie = Movie(movie_name, [width, height], framerate, audio, scenes, phoneme_hacks, start_scene=start_scene)
+    min_silence_length = movie_data["minSilenceLength"]
+    silence_thresh = movie_data["silenceThresh"]
+
+    movie = Movie(movie_name, [width, height], framerate, audio, scenes, phoneme_hacks, min_silence_length, silence_thresh, start_scene=start_scene)
     print("Done parsing movie")
     return movie
 

@@ -1,0 +1,72 @@
+{
+  "phones": [
+    {
+      "duration": 0.04,
+      "phone": "w_B"
+    },
+    {
+      "duration": 0.04,
+      "phone": "ao_I"
+    },
+    {
+      "duration": 0.12,
+      "phone": "t_I"
+    },
+    {
+      "duration": 0.04,
+      "phone": "er_I"
+    },
+    {
+      "duration": 0.07,
+      "phone": "m_I"
+    },
+    {
+      "duration": 0.07,
+      "phone": "eh_I"
+    },
+    {
+      "duration": 0.06,
+      "phone": "l_I"
+    },
+    {
+      "duration": 0.07,
+      "phone": "ah_I"
+    },
+    {
+      "duration": 0.1,
+      "phone": "n_E"
+    },
+    {
+      "duration": 0.09,
+      "phone": "k_B"
+    },
+    {
+      "duration": 0.06,
+      "phone": "ae_I"
+    },
+    {
+      "duration": 0.06,
+      "phone": "n_I"
+    },
+    {
+      "duration": 0.06,
+      "phone": "t_I"
+    },
+    {
+      "duration": 0.06,
+      "phone": "ah_I"
+    },
+    {
+      "duration": 0.08,
+      "phone": "l_I"
+    },
+    {
+      "duration": 0.08,
+      "phone": "ow_I"
+    },
+    {
+      "duration": 0.19,
+      "phone": "p_E"
+    }
+  ]
+}

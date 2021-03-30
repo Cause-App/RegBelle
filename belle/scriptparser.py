@@ -77,6 +77,12 @@ def framerate(movie, movie_data, fr):
 def phoneme_hack(movie, movie_data, original, hack):
     movie["phonemeHacks"][original] = hack
 
+def min_silence_length(movie, movie_data, length):
+    movie["minSilenceLength"] = length
+
+def silence_thresh(movie, movie_data, thresh):
+    movie["silenceThresh"] = thresh
+
 def background_image(movie, movie_data, path):
     path = nullify(path)
     movie_data["background-image"] = path
@@ -205,6 +211,8 @@ commands = {
     "resolution": [[int, int], resolution],
     "framerate": [[int], framerate],
     "phoneme-hack": [[str, str], phoneme_hack],
+    "min-silence-length": [[float], min_silence_length],
+    "silence-thresh": [[int], silence_thresh],
     "background-image": [[str], background_image],
     "background-image-x": [[float], background_image_x],
     "background-image-y": [[float], background_image_y],
@@ -242,7 +250,9 @@ def parse_script(lines):
         "scenes": [
             current_scene
         ],
-        "phonemeHacks": {}
+        "phonemeHacks": {},
+        "minSilenceLength": 0.5,
+        "silenceThresh": -16
     }
     movie_data = {
         "current-scene": current_scene,

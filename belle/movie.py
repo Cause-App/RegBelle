@@ -8,6 +8,7 @@ import contextlib
 import shutil
 import threading
 import time
+from pydub import AudioSegment, silence
 from . import tools
 from . import richscript
 
@@ -38,7 +39,7 @@ class PopenThread(threading.Thread):
                     break
 
 class Movie:
-    def __init__(self, name, resolution, framerate, audio, scenes, phoneme_hacks, start_scene=0):
+    def __init__(self, name, resolution, framerate, audio, scenes, phoneme_hacks, min_silence_length, silence_thresh, start_scene=0):
         self.name = name
         self.resolution = resolution
         self.framerate = framerate
@@ -52,8 +53,14 @@ class Movie:
                 frames = f.getnframes()
                 rate = f.getframerate()
                 self.duration = frames / float(rate)
+            a = AudioSegment.from_wav(self.audio)
+            s = silence.detect_silence(a, min_silence_len=int(min_silence_length*1000), silence_thresh=silence_thresh, seek_step=1)
+            self.silence = [((start/1000.0),(stop/1000.0)) for start,stop in s]
+            print("Silent regions detected:")
+            print(self.silence)
         else:
             self.duration = None
+            self.silence = []
 
     def init(self, output_dir, gentle_port, force_overwrite_mouth_data=False, force_overwrite_transcript=False, force_overwrite_audio=False, force_delete_frames=False, launch_gentle=False):
         print("Initializing movie...")
@@ -268,4 +275,4 @@ class Movie:
         if scene is None:
             return None
 
-        return scene.render_frame(time, *self.resolution)
+        return scene.render_frame(time, *self.resolution, self.silence)
