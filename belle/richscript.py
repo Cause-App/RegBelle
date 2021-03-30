@@ -17,30 +17,45 @@ template = """
             font-size: 1.5em;
             padding: 50px;
         }}
+
+        .scene {{
+            white-space: nowrap
+        }}
         
-        h1 {{
-            text-decoration: underline;
-            font-size: 1.5em;
-        }}
-
-        h1:not(:first-child) {{
-            padding-top: 100px;
-        }}
-
         img {{
-            max-width: 700px;
-            max-height: 500px;
+            max-width: 500px;
+            max-height: 300px;
             border: 1px solid black;
+            margin: 0 50px;
+        }}
+
+        .text {{
+            vertical-align: text-top;
         }}
     </style>
 </head>
 <body>
+    <table>
     {content}
+    </table>
 </body>
 </html>
 """
 
-scene_heading_template = "<h1>Scene {number}</h1>"
+scene_template = """
+<tr>
+    <td class='text scene'>
+        <span>Scene {number}</span>
+    </td>
+    <td>
+        {bg_image}
+    </td>
+    <td class='text'>
+        {content}
+    </td>
+</tr>
+
+"""
 background_image_template = "<img src='{image}'>"
 
 def generate_rich_script(movie, output_dir, force_overwrite=False):
@@ -56,19 +71,20 @@ def generate_rich_script(movie, output_dir, force_overwrite=False):
     
     content = ""
     for i, scene in enumerate(movie.scenes):
-        content += scene_heading_template.format(number=i)
+        scene_content = ""
+        scene_bg_image = ""
         if scene.background_image is not None:
 
             encoded_string = f"data:image/png;base64,{base64.b64encode(cv2.imencode('.png', scene.background_image)[1]).decode('utf-8').replace(' ','')}"
 
-            content += background_image_template.format(image=encoded_string)
+            scene_bg_image = background_image_template.format(image=encoded_string)
         
-            content += "<br /><br/>"
-
         for p in scene.paragraphs:
             text = h.escape(p.text)
             
-            content += text.replace("~", "") + "<br /><br />"
+            scene_content += text.replace("~", "") + "<br /><br />"
+        
+        content += scene_template.format(number=i, bg_image=scene_bg_image, content=scene_content)
     
     html = template.format(title=movie.name, content=content)
     with open(filename, "w") as file:
