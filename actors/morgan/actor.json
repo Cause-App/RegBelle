@@ -39,6 +39,13 @@
                     "mouthX": 0.45,
                     "mouthY": 0.24
                 }
+            ],
+            "evil": [
+            	{
+            		"artwork": "body/evil/evil-1.svg",
+                    "mouthX": 0.47,
+                    "mouthY": 0.235
+            	}
             ]
         },
         "mouth": {
