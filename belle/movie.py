@@ -48,21 +48,19 @@ class Movie:
         self.scene_end_times = [0] * len(scenes)
         self.phoneme_hacks = phoneme_hacks
         self.start_scene = start_scene
+        self.silence = []
+        self.min_silence_length = min_silence_length
+        self.silence_thresh = silence_thresh
         if audio is not None:
             with contextlib.closing(wave.open(self.audio, 'r')) as f:
                 frames = f.getnframes()
                 rate = f.getframerate()
                 self.duration = frames / float(rate)
-            a = AudioSegment.from_wav(self.audio)
-            s = silence.detect_silence(a, min_silence_len=int(min_silence_length*1000), silence_thresh=silence_thresh, seek_step=1)
-            self.silence = [((start/1000.0),(stop/1000.0)) for start,stop in s]
-            print("Silent regions detected:")
-            print(self.silence)
         else:
             self.duration = None
             self.silence = []
 
-    def init(self, output_dir, gentle_port, force_overwrite_mouth_data=False, force_overwrite_transcript=False, force_overwrite_audio=False, force_delete_frames=False, launch_gentle=False):
+    def init(self, output_dir, gentle_port, force_overwrite_mouth_data=False, force_overwrite_transcript=False, force_overwrite_audio=False, force_overwrite_silence_data=False, force_delete_frames=False, launch_gentle=False):
         print("Initializing movie...")
         self.create_transcript(output_dir, hack=False,
                                force_overwrite=force_overwrite_transcript)
@@ -73,6 +71,7 @@ class Movie:
             force_overwrite_transcript=force_overwrite_transcript,
             launch_gentle=launch_gentle
         )
+        self.silence = self.get_silence_data(output_dir, force_overwrite=force_overwrite_silence_data)
         self.carve_mouth_data(mouth_data)
         self.copy_audio(output_dir, force_overwrite=force_overwrite_audio)
         self.delete_frames(output_dir, force_delete=force_delete_frames)
@@ -147,6 +146,29 @@ class Movie:
     
     def create_rich_script(self, output_dir, force_overwrite=False):
         richscript.generate_rich_script(self, output_dir, force_overwrite=force_overwrite)
+    
+    def get_silence_data(self, output_dir, force_overwrite=False):
+        print("Getting silence data data")
+        silence_data_file = os.path.join(
+            output_dir, self.name, "silence_data.json")
+
+        if os.path.exists(silence_data_file):
+            if not force_overwrite and (tools.confirm("Would you like to overwrite the silence data file?") == "n"):
+                with open(silence_data_file, "r") as file:
+                    silence_data = json.loads(file.read())
+                return silence_data
+
+        a = AudioSegment.from_wav(self.audio)
+        s = silence.detect_silence(a, min_silence_len=int(self.min_silence_length*1000), silence_thresh=self.silence_thresh, seek_step=1)
+        silence_data = [((start/1000.0),(stop/1000.0)) for start,stop in s]
+        print("Silent regions detected:")
+        print(silence_data)
+
+        with open(silence_data_file, "w") as file:
+            file.write(json.dumps(silence_data))
+
+        return silence_data
+
 
     def get_mouth_data(self, output_dir, gentle_port, force_overwrite_mouth_data=False, force_overwrite_transcript=False, launch_gentle=False):
         print("Getting mouth data")
