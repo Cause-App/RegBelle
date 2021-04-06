@@ -273,9 +273,16 @@ class Movie:
                         if word_data["end"] > end_time:
                             end_time = word_data["end"]
                         if word_data["end"] > paragraph_end_time:
-                            paragraph_end_time = word_data["end"]
+                            if word_index < len(words_data) - 1 and "start" in words_data[word_index+1]:
+                                paragraph_end_time = words_data[word_index+1]["start"]
+                            else:
+                                paragraph_end_time = word_data["end"]
                         if word != stripped_word:
-                            paragraph.update_times.append(word_data["end"])
+                            if word_index < len(words_data) - 1 and "start" in words_data[word_index+1]:
+                                paragraph.update_times.append(words_data[word_index+1]["start"])
+                            else:
+                                paragraph.update_times.append(word_data["end"])
+
                     word_index += 1
                 paragraph.words_data = my_words
                 scene.paragraph_end_times[j] = paragraph_end_time
