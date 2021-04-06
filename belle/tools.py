@@ -17,6 +17,7 @@ def confirm(prompt, default=0, options=["y", "n"]):
     return answer
 
 cache = {}
+size_cache = {}
 def load_image(path, width, height, scale=None, interpolation=cv2.INTER_AREA):
     if path not in cache:
         assert width is not None or height is not None or scale is not None
@@ -30,6 +31,7 @@ def load_image(path, width, height, scale=None, interpolation=cv2.INTER_AREA):
         else:
             img = cv2.imread(path, cv2.IMREAD_UNCHANGED)
         cache[path] = img
+        size_cache[path] = {}
     img = cache[path]
     im_height, im_width, _ = img.shape
     if scale is None:
@@ -43,12 +45,14 @@ def load_image(path, width, height, scale=None, interpolation=cv2.INTER_AREA):
     else:
         width = round(im_width*scale[0])
         height = round(im_height*scale[1])
-    
-    img = cv2.resize(img, (width, height), interpolation=interpolation)
-    if img.shape[2] == 3:
-        img = cv2.cvtColor(img, cv2.COLOR_RGB2RGBA)
+    size_cache_key = f"{width},{height}"
+    if size_cache_key not in size_cache[path]:
+        img = cv2.resize(img, (width, height), interpolation=interpolation)
+        if img.shape[2] == 3:
+            img = cv2.cvtColor(img, cv2.COLOR_RGB2RGBA)
+        size_cache[path][size_cache_key] = img
 
-    return img
+    return size_cache[path][size_cache_key]
 
 def overlay_image(base, overlay, x, y):
     base_height, base_width, _ = base.shape
