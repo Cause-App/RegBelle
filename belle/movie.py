@@ -284,6 +284,11 @@ class Movie:
                             start_time = word_data["start"]
                         if word_data["start"] < paragraph_start_time or paragraph_start_time == -1:
                             paragraph_start_time = word_data["start"]
+                    else:
+                        if start_time == -1 and i > 0:
+                            start_time = self.scene_end_times[i-1]
+                        if paragraph_start_time == -1 and j > 0:
+                            paragraph_start_time = scene.paragraph_end_times[j-1]
 
                     word_index += 1
                 paragraph.words_data = my_words
@@ -293,16 +298,18 @@ class Movie:
             self.scene_start_times[i] = start_time
 
         self.scene_end_times[-1] = self.duration
+        self.scene_start_times[0] = 0
         print("Done carving mouth data")
 
     def which_scene(self, time):
-        if time < self.scene_start_times[0]:
-            return self.scenes[0]
+        if time < 0:
+            return None
         if time > self.duration:
             return None
         for i, start_time in enumerate(self.scene_start_times):
-            if start_time < time and (i == len(self.scenes)-1 or time < self.scene_start_times[i+1]):
+            if start_time <= time and (i == len(self.scenes)-1 or time < self.scene_start_times[i+1]):
                 return self.scenes[i]
+        print(time, self.scene_start_times)
         return None
 
     def render_frame(self, time):
