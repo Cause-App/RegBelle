@@ -98,7 +98,7 @@ mouth_types = {
         "ao", "r", "ow", "uw", "aw", "oov", "oy"
     ],
     "m,p,b": [
-        "b", "m", "p"
+        "b", "m", "p", "$sil"
     ],
     "f,v": [
         "v", "f"
