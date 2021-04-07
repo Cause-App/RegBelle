@@ -17,7 +17,7 @@ class Paragraph:
         self.actors = actors
         self.text = text
         self.words_data = None
-        self.update_times = [0]
+        self.update_times = []
         self.last_time = -1
     
     def which_phone(self, time, silence):

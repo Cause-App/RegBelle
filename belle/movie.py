@@ -277,7 +277,7 @@ class Movie:
                             end_time = word_data["end"]
                         if word_data["end"] > paragraph_end_time:
                             paragraph_end_time = word_data["end"]
-                        if word != stripped_word:
+                        if word != stripped_word and len(my_words) > 1:
                             paragraph.update_times.append(word_data["end"])
                     if "start" in word_data:
                         if word_data["start"] < start_time or start_time == -1:
