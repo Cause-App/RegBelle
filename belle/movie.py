@@ -46,6 +46,7 @@ class Movie:
         self.audio = audio
         self.scenes = scenes
         self.scene_end_times = [0] * len(scenes)
+        self.scene_start_times = [0] * len(scenes)
         self.phoneme_hacks = phoneme_hacks
         self.start_scene = start_scene
         self.silence = []
@@ -245,8 +246,10 @@ class Movie:
 
         for i, scene in enumerate(self.scenes):
             end_time = 0
+            start_time = -1
             for j, paragraph in enumerate(scene.paragraphs):
                 paragraph_end_time = 0
+                paragraph_start_time = -1
                 my_words = []
                 words = paragraph.text
                 for h in self.phoneme_hacks:
@@ -273,29 +276,32 @@ class Movie:
                         if word_data["end"] > end_time:
                             end_time = word_data["end"]
                         if word_data["end"] > paragraph_end_time:
-                            if word_index < len(words_data) - 1 and "start" in words_data[word_index+1]:
-                                paragraph_end_time = words_data[word_index+1]["start"]
-                            else:
-                                paragraph_end_time = word_data["end"]
+                            paragraph_end_time = word_data["end"]
                         if word != stripped_word:
-                            if word_index < len(words_data) - 1 and "start" in words_data[word_index+1]:
-                                paragraph.update_times.append(words_data[word_index+1]["start"])
-                            else:
-                                paragraph.update_times.append(word_data["end"])
+                            paragraph.update_times.append(word_data["end"])
+                    if "start" in word_data:
+                        if word_data["start"] < start_time or start_time == -1:
+                            start_time = word_data["start"]
+                        if word_data["start"] < paragraph_start_time or paragraph_start_time == -1:
+                            paragraph_start_time = word_data["start"]
 
                     word_index += 1
                 paragraph.words_data = my_words
                 scene.paragraph_end_times[j] = paragraph_end_time
+                scene.paragraph_start_times[j] = paragraph_start_time
             self.scene_end_times[i] = end_time
+            self.scene_start_times[i] = start_time
 
         self.scene_end_times[-1] = self.duration
         print("Done carving mouth data")
 
     def which_scene(self, time):
-        if time < 0:
+        if time < self.scene_start_times[0]:
+            return self.scenes[0]
+        if time > self.duration:
             return None
-        for i, end_time in enumerate(self.scene_end_times):
-            if end_time > time:
+        for i, start_time in enumerate(self.scene_start_times):
+            if start_time < time and (i == len(self.scenes)-1 or time < self.scene_start_times[i+1]):
                 return self.scenes[i]
         return None
 

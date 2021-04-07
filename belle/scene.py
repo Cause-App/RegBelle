@@ -14,6 +14,7 @@ class Scene:
             self.background_pos = None
         self.paragraphs = paragraphs
         self.paragraph_end_times = [0]*len(paragraphs)
+        self.paragraph_start_times = [0]*len(paragraphs)
     
     def which_paragraph(self, time):
         if time < 0:
