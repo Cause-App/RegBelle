@@ -148,7 +148,7 @@ class Movie:
         richscript.generate_rich_script(self, output_dir, force_overwrite=force_overwrite)
     
     def get_silence_data(self, output_dir, force_overwrite=False):
-        print("Getting silence data data")
+        print("Getting silence data")
         silence_data_file = os.path.join(
             output_dir, self.name, "silence_data.json")
 
